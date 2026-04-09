@@ -18,22 +18,21 @@ public class Test {
 		SessionFactory sf = HibernateConfig.getSessionFactory();
 		Session session = sf.openSession();
 
-		Employee employee = new Employee("Nita", 30);
+		Employee employee = new Employee("Gita", 20);
 		Transaction tr = session.beginTransaction();
 		
 		session.save(employee);
 
 		tr.commit();
 		session.close();
-//
-//		EmployeeService service = new EmployeeService();
-//
-//        // Fetch employee by ID
-//        Object result = service.getEmployeeById(3); 
-//
-//        System.out.println(result);
 
 		EmployeeService service = new EmployeeService();
+//
+//        // Fetch employee by ID
+//        Object result = service.getEmployeeById(2); 
+//
+//        System.out.println(result);
+//
 
 		List<Employee> list = service.getAllEmployees();
 
@@ -42,18 +41,18 @@ public class Test {
 		}
 
 		 //🔹 Update
-		String updateMsg = service.updateEmployeeById(2, "Kushi", 45);
+		String updateMsg = service.updateEmployeeById(5, "Ajay", 55);
 		System.out.println(updateMsg);
 
-		// 🔹 Delete
-		String deleteMsg = service.deleteEmployeeById(5);
-		System.out.println(deleteMsg);
-		
-		List<Employee> list1 = service.getAllEmployees();
-
-		for (Employee emp : list1) {
-			System.out.println(emp);
-		}
+//		// 🔹 Delete
+//		String deleteMsg = service.deleteEmployeeById(5);
+//		System.out.println(deleteMsg);
+//		
+//		List<Employee> list1 = service.getAllEmployees();
+//
+//		for (Employee emp : list1) {
+//			System.out.println(emp);
+//		}
 
 		System.out.println("done...");
 	}
