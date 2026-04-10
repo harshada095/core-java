@@ -246,5 +246,58 @@ public class EmployeeRepo {
 
         return employees;
     }
+
+    public List<Object[]> getSpecificColumnData() {
+
+    List<Object[]> employees = null;
+
+    try {
+        Session openSession = sf.openSession();
+        Criteria criteria = openSession.createCriteria(Employee.class);
+
+        PropertyProjection id = Projections.property("id");
+        PropertyProjection name = Projections.property("name");
+        PropertyProjection salary = Projections.property("salary");
+
+        ProjectionList projectionList = Projections.projectionList();
+
+        projectionList.add(id);
+        projectionList.add(name);
+        projectionList.add(salary);
+
+        criteria.setProjection(projectionList);
+        employees = criteria.list();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return employees;
+}
+public double maxSalary() {
+    
+    double max = 0;
+    
+    try {
+        Session openSession = sf.openSession();
+        
+        Criteria criteria = openSession.createCriteria(Employee.class);
+        
+        AggregateProjection maxProjection = Projections.max("salary");
+        
+        criteria.setProjection(maxProjection);
+        
+        List<Double> list = criteria.list();
+        
+        if (!list.isEmpty()) {
+            max = list.get(0);
+        }
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    
+    return max;
+}
+
     
 }
