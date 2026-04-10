@@ -94,6 +94,15 @@ public class EmployeeService {
 
         List<Employee> employees = repo.pagination(records, offset);
         return (employees != null) ? employees : Collections.emptyList();
+            }
+    
+    public List<Object[]> getSpecificColumnData() {
+        
+        return repo.getSpecificColumnData();
     }
-
+    public double maxSalary() {
+        // Call the method from the repository and return the result
+        double max = repo.maxSalary();
+        return max;
+    }
 }
